@@ -5,12 +5,12 @@ from pid_template import update
 from pid_template import calculate_desired_acceleration
 from pid_template import acceleration_to_throttle_percentage
 
-K_P = 0.1
+K_P = 3.98
 K_I = 0.1
 K_D = 0.1
- 
+
 STEPS = 550
- 
+
 car = make_car(desired_v=20.0, dt=0.1)
 
 # create lists
@@ -19,11 +19,9 @@ errors = []
 time = []
 
 
-car = make_car(desired_v=20.0, dt=0.1)
-velocities = []
-errors = []
 
-# STEPS loop
+
+# the STEPS loop
 for this_step in range(STEPS): # [0, 550)
     velocities.append(car["v"]) # append velocity
     time.append(car["t"])
@@ -40,23 +38,9 @@ for this_step in range(STEPS): # [0, 550)
 velocities = [round(x, 3) for x in velocities]
 errors = [round(x, 4) for x in errors]
 
-# updating K_P and saving the final velocity and final error
-K_Ps.append(round(K_P, 2))
-final_velocities.append(velocities[STEPS - 1])
-final_errors.append(errors[STEPS - 1])
-K_P += 0.05
+print(velocities[-1])
+print(errors[-1])
 
-
-print(final_velocities)
-print(final_errors)
-
-plt.figure()
-plt.plot(K_Ps, final_velocities)
-plt.figure()
-plt.plot(K_Ps, final_errors)
-plt.show()
-
-"""
 plt.figure()
 plt.plot(time, velocities)
 
@@ -64,12 +48,3 @@ plt.figure()
 plt.plot(time, errors)
 
 plt.show()
-"""
-
-# just to see
-# print(velocities)
-# print(errors)
-
-
-
-# 
