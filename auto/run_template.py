@@ -38,7 +38,12 @@ for this_step in range(STEPS): # [0, 550)
 velocities = [round(x, 3) for x in velocities]
 errors = [round(x, 4) for x in errors]
 
+plt.figure()
 plt.plot(time, velocities)
+
+plt.figure()
+plt.plot(time, errors)
+
 plt.show()
 
 
