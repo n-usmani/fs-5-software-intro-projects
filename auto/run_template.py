@@ -32,6 +32,9 @@ for this_step in range(STEPS): # [0, 550)
 
     errors.append(err_desired_accel[0]) # append error
 
+    # addition for part 5: add error to net_error
+    car["net integral"] += (err_desired_accel[0] * car["dt"])
+
     update(car, throttle_perc)
 # end of STEPS loop
 

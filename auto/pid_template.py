@@ -46,7 +46,7 @@ def calculate_desired_acceleration(car: dict, K_P: float, K_I: float = 0.0, K_D:
         # calculate the error (a float)
         error = (car["desired_v"] - car["v"]) # / car["v"]
 
-        desired_accel = K_P * error
+        desired_accel = K_P * error + K_I * car["net integral"]
 
         err_desired_accel = (error, desired_accel) # put as float
         return err_desired_accel # done!
