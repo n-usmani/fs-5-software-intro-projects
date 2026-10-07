@@ -45,7 +45,7 @@ Here is a flow chart of the complete system. Please use this in combination with
    - **For every function implementation please refer to the equation image for help**.
      - In the equation sheet C(command) is desired acceleration in our project as that is what we are trying to control.
 
-1. Using the desired velocity, `desired_v`, and the current velocity, `car["v"]`, **calculate the difference** between the two, to find **error** of our controller. This error is useful as it will be used to calculate how much acceleration we need to reach the desired velocity, given our current velocity. Your first controller iteration will use a constant, `K_P`, proportional to the error to find this **desired acceleration**. 
+1. Using the desired velocity, `desired_v`, and the current velocity, `car["v"]`, **calculate the difference** between the two, to find **error** of our controller. This error is useful as it will be used to calculate how much acceleration we need to reach the desired velocity, given our current velocity. Your first controller iteration will use a constant, `K_P`, proportional to the error to find this **desired acceleration**.
     
     Write a function, `calculate_desired_acceleration`, that calculates the **error** and then uses that error to **calculate the desired acceleration**. For this step **only use the proportional term**, do not use the other two terms.
     

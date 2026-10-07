@@ -18,8 +18,13 @@ velocities = []
 errors = []
 time = []
 
+
+
+
+# the STEPS loop
 for this_step in range(STEPS): # [0, 550)
     velocities.append(car["v"]) # append velocity
+    time.append(car["t"])
 
     # get error & desired accel
     err_desired_accel = calculate_desired_acceleration(car, K_P, K_I, K_D)
@@ -33,9 +38,13 @@ for this_step in range(STEPS): # [0, 550)
 velocities = [round(x, 3) for x in velocities]
 errors = [round(x, 4) for x in errors]
 
+plt.plot(time, velocities)
+plt.show()
 
-print(velocities)
-print(errors)
+
+# just to see
+# print(velocities)
+# print(errors)
 
 
 
