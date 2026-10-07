@@ -18,38 +18,33 @@ velocities = []
 errors = []
 time = []
 
-final_velocities = []
-final_errors = []
-K_Ps = []
 
+car = make_car(desired_v=20.0, dt=0.1)
+velocities = []
+errors = []
 
-for ii in range(18):
-    # the STEPS loop
+# STEPS loop
+for this_step in range(STEPS): # [0, 550)
+    velocities.append(car["v"]) # append velocity
+    time.append(car["t"])
 
-    car = make_car(desired_v=20.0, dt=0.1)
-    velocities = []
-    errors = []
+    # get error & desired accel
+    err_desired_accel = calculate_desired_acceleration(car, K_P, K_I, K_D)
+    throttle_perc = err_desired_accel[1]
 
-    for this_step in range(STEPS): # [0, 550)
-        velocities.append(car["v"]) # append velocity
-        time.append(car["t"])
+    errors.append(err_desired_accel[0]) # append error
 
-        # get error & desired accel
-        err_desired_accel = calculate_desired_acceleration(car, K_P, K_I, K_D)
-        throttle_perc = err_desired_accel[1]
+    update(car, throttle_perc)
+# end of STEPS loop
 
-        errors.append(err_desired_accel[0]) # append error
+velocities = [round(x, 3) for x in velocities]
+errors = [round(x, 4) for x in errors]
 
-        update(car, throttle_perc)
-    # end of STEPS loop
-
-    velocities = [round(x, 3) for x in velocities]
-    errors = [round(x, 4) for x in errors]
-
-    K_Ps.append(round(K_P, 2))
-    final_velocities.append(velocities[STEPS - 1])
-    final_errors.append(errors[STEPS - 1])
-    K_P += 0.05
+# updating K_P and saving the final velocity and final error
+K_Ps.append(round(K_P, 2))
+final_velocities.append(velocities[STEPS - 1])
+final_errors.append(errors[STEPS - 1])
+K_P += 0.05
 
 
 print(final_velocities)
