@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 from pid_template import make_car
 from pid_template import update
 from pid_template import calculate_desired_acceleration
@@ -12,4 +13,12 @@ STEPS = 550
  
 car = make_car(desired_v=20.0, dt=0.1)
 
-#WRITE CODE HERE
+# create lists
+velocities = []
+errors = []
+time = []
+
+for this_step in range(STEPS): # [0, 550)
+
+
+# 
