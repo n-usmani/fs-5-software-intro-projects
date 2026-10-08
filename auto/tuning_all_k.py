@@ -84,3 +84,5 @@ for k_p in range(30):
     # END k_p LOOP
 
 # now let's figure out which combo of the 3 yielded lowest error
+best_combo = min(avg_errors, key=lambda x: x[3])
+print(best_combo)
