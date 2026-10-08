@@ -7,6 +7,7 @@ K_P vs final error
 
 import matplotlib.pyplot as plt
 import numpy as np
+import statistics
 from pid_template import make_car
 from pid_template import update
 from pid_template import calculate_desired_acceleration
@@ -25,12 +26,12 @@ velocities = []
 errors = []
 time = []
 
-final_velocities = []
-final_errors = []
+avg_velocities = []
+avg_errors = []
 K_Ps = []
 
 
-for ii in range(18): # <-- the K_P values loop
+for ii in range(30): # <-- the K_P values loop
     # the STEPS loop
 
     car = make_car(desired_v=20.0, dt=0.1)
@@ -55,18 +56,21 @@ for ii in range(18): # <-- the K_P values loop
 
     # updating K_P and saving the final velocity and final error
     K_Ps.append(round(K_P, 2))
-    final_velocities.append(velocities[STEPS - 1])
-    final_errors.append(errors[STEPS - 1])
-    K_P += 0.05
+    avg_velocities.append(statistics.mean(velocities))
+    avg_errors.append(statistics.mean(errors))
+    K_P += 0.1
 
+    avg_velocities = [round(x, 3) for x in avg_velocities]
+    avg_errors = [round(x, 4) for x in avg_errors]
 
-print(final_velocities)
-print(final_errors)
+print(K_Ps)
+print(avg_velocities)
+print(avg_errors)
 
 plt.figure()
-plt.plot(K_Ps, final_velocities)
+plt.plot(K_Ps, avg_velocities)
 plt.figure()
-plt.plot(K_Ps, final_errors)
+plt.plot(K_Ps, avg_errors)
 plt.show()
 
 """
